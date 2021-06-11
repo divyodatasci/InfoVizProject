@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Life Expectancy Reports</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+    <link rel="stylesheet" href="highcharts-style.css">
+    <link rel="stylesheet" href="bubblechart.css">
+    <link rel="stylesheet" type="text/css" href="//github.com/downloads/lafeber/world-flags-sprite/flags32.css" />
+  </head>
+  <body class="d-flex h-100 text-center text-white bg-custom" onload="onloadfunc()">
+    
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <!-- <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">Life Expectancy Dashboard</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end fixed-top">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="#bargraph-container" onclick='unhidecontainers()'>Highest and Lowest</a>
+        <a class="nav-link" href="#world" onclick='unhidecontainers()'>Explore World</a>
+        <a class="nav-link" href="#factors-container" onclick='unhidecontainers()'>Analysing Factors</a>
+        <a class="nav-link" href="#bubble-container" onclick='unhidecontainers()'>Factors and Bubble Chart</a>
+        
+
+      </nav>
+    </div>
+  </header> -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-custom">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Life Expectancy Dashboard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#bargraph-container" onclick='unhidecontainers()'>Highest and Lowest</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#world" onclick='unhidecontainers()'>Explore World</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#factors-container" onclick='unhidecontainers()'>Analysing Factors</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#bubble-container" onclick='unhidecontainers()'>Factors and Bubble Chart</a>
+          </li>
+         
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li> -->
+        </ul>
+        <!-- <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+      </div>
+    </div>
+  </nav>
+
+  <main class="px-3">
+    <div class='welcome'>
+      <h1>Choose your dream country</h1>
+      <p>Do you want to know how long do people live in your dream country?</p>
+        <select class="form-select" id = 'country-select' aria-label="Default select example">
+            <option selected>Open this select menu</option>
+        </select>
+        <p class="lead">I will help you to know how long do people live there!</p>
+        <p class="lead" id="button-cover">
+          <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white inactiveLink" onclick="coverresult()">Click Here!</a>
+        </p>
+      <div class ="result-statement lead" id="result-statement">
+       <p class= "statement p1"> </p>
+       <p class ="result"></p>
+       <p class="statement p2"></p>
+      </div>
+    
+      <div class='after-results hide' id = 'after-results'>
+        <p class="lead analyse" id="button-analyse">
+          <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white " onclick="analysefunc()">Let's Analyse</a>
+        </p>
+        <p class="lead change" id="button-change">
+          <a href="#container-time" class="btn btn-lg btn-secondary fw-bold border-white bg-white " onclick="changecountry()">Change Country</a>
+        </p>
+      </div>
+    </div>
+    <div class='dashboard'  id='dashboard'>
+      <div class='time-series graph-container hide' id="time-series">
+        <div class='section-heading'><h2>Life Expectancy and Time</h2></div>
+        <div class="divided-section">
+          <div class="container-time" id="container-time"></div>
+          <div class='compare'>
+            <select class="form-select" id = 'country-select-1' aria-label="Default select example">
+              <option selected>Choose a different country to compare</option>
+            </select>
+            <select class="form-select" id = 'country-select-2' aria-label="Default select example">
+              <option selected>Choose a different country to compare</option>
+            </select>
+            <select class="form-select" id = 'country-select-3' aria-label="Default select example">
+              <option selected>Choose a different country to compare</option>
+            </select>
+            <select class="form-select" id = 'country-select-4' aria-label="Default select example">
+              <option selected>Choose a different country to compare</option>
+            </select>
+            <p class="lead btn btn-compare" id="button-compare">
+              <a href="#container-time" class="btn btn-lg btn-secondary fw-bold border-white bg-white inactiveLink " onclick="comparecountry()">Click to compare!</a>
+            </p>
+            <p class="lead btn btn-reset" id="button-reset">
+              <a href="#container-time" class="btn btn-lg btn-secondary fw-bold border-white bg-white inactiveLink " onclick="resetcompare()">Reset Compare Fields!</a>
+            </p>
+            <!-- <p class="lead btn btn-reset" id="button-world">
+              <a href="#world-map" class="btn btn-lg btn-secondary fw-bold border-white bg-white  " onclick="showworld()">World Map Comparison!</a>
+            </p> -->
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class='bargraph-container graph-container dash hide' id='bargraph-container' >
+        <div class='section-heading'><h2>The Highest and The Lowest Life Expectancies</h2></div>
+        <div class="divided-section">
+          <div id='bg-container' class='bg-container'></div>
+          <div class ='toggle'>
+            <p class='para'>Click the button below to toggle between the top 20 and the last 20 countries. </p>
+            <p class="lead btn btn-toggle" id="button-toggle">
+              <a href="#bar-graph" class="btn btn-lg btn-secondary fw-bold border-white bg-white " id='bar-graph' onclick="toggle()">Last 20 countries</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="world graph-container dash hide" id="world">
+        <div class='section-heading'><h2>Explore the world using World Map and Packed Bubbled Chart </h2></div>
+        <div class="divided-section">
+          <div class='pb-container graph-container' id='pb-container'></div>
+          <div class ='toggle'>
+            <p class='parabw'>This chart has divided the countries into different regions, the highligted names in the bubbles shows the names of the countries with the best life expectancies. Hovering over the bubbles shows the details of different countries. </p>
+            <p> Toggle between world map and bubble chart using the button below.</p>
+            <p class="lead btn btn-toggle" id="button-toggle">
+              <a href="#bar-graph" class="btn btn-lg btn-secondary fw-bold border-white bg-white " id='bar-graph' onclick="plotWorldMap()">World Map</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class=" dash graph-container hide" id="factors-container">
+        <div class="heading"> <h1>Analysing the factors.</h2> </div>
+        <div class='section-heading'><h2>Relationship between individual factors and Life Expectancy </h2></div>
+        <div class="divided-section">
+          <div class='sp-container' id="sp-container"></div>
+          <div class='selectors'>
+            <select class="form-select" id = 'var-select' aria-label="Default select example">
+              <option selected>Choose a factor for X axis</option>
+            </select>
+            <p class="lead btn btn-scatter" id="button-scatter">
+              <a href="#scatter-link" class="btn btn-lg btn-secondary fw-bold border-white bg-white inactiveLink " onclick="plotscatter()">Visualise the Effect</a>
+            </p>
+          </div>
+        </div>
+        <div class='section-heading' ><h2>Relationship between different factors and Life Expectancy </h2></div>
+        <div class="divided-section">
+          <div class='bubble-container' id="bubble-container"></div>
+          <div class='selectors'>
+            <select class="form-select" id = 'x-select' aria-label="Default select example">
+              <option selected>Choose a factor for X axis</option>
+            </select>
+            <select class="form-select" id = 'y-select' aria-label="Default select example">
+              <option selected>Choose another factor for Y axis</option>
+            </select>
+            <p class="lead btn btn-factor btn-visualise" id="button-visualise">
+              <a href="#bubble-container" class="btn btn-lg btn-secondary fw-bold border-white .button-bubble bg-white inactiveLink" onclick="analysefactors()">Visualise the Effect</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mt-auto text-white-50">
+    <p>Created by Divyojyoti Ghosh, 100342022, PGT Student at UEA</p>
+  </footer>
+</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.js"></script>
+	
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+
+<script src ="cover.js"></script>
+<script src='bubblechart.js'></script>
+<script src='packedbubble.js'></script>
+<script src='bargraph.js'></script>
+<script src='worldmap.js'></script>
+
+<script src="setthemedarkunica.js"></script>
+    
+  </body>
+</html>
