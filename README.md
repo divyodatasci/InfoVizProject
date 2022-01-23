@@ -1,2 +1,0 @@
-# InfoVizProject
-Life Expectancy Dashboard
