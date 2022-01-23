@@ -177,6 +177,9 @@ var pb_data =[{'name': 'South Asia',
   'data': [{'name': 'Canada', 'value': 82.05},
    {'name': 'United States', 'value': 78.79}]},
 ];
+
+
+
 function plotpackedbubble(){
     Highcharts.chart('pb-container', {
         chart: {
@@ -222,51 +225,9 @@ function plotpackedbubble(){
         series: pb_data,
     })
 }
-//    Highcharts.chart('pb-container', {
-//     chart: {
-//         type: 'packedbubble',
-//         height: '60%'
-//     },
-//     title: {
-//         text: 'Life Expectancy Around the World (Region Wise)'
-//     },
-//     tooltip: {
-//         useHTML: true,
-//         pointFormat: '<b>{point.name}:</b> {point.value} Years</sub>'
-//     },
-//     plotOptions: {
-//         packedbubble: {
-//             minSize: '-2%',
-//             maxSize: '150%',
-//             zMin: 0,
-//             zMax: 500,
-//             layoutAlgorithm: {
-//                 gravitationalConstant: 0.05,
-//                 splitSeries: true,
-//                 seriesInteraction: false,
-//                 dragBetweenSeries: true,
-//                 parentNodeLimit: true
-//             },
-//             dataLabels: {
-//                 enabled: true,
-//                 format: '{point.name}',
-//                 filter: {
-//                     property: 'y',
-//                     operator: '>',
-//                     value: 80
-//                 },
-//                 style: {
-//                     color: 'black',
-//                     textOutline: 'none',
-//                     fontWeight: 'normal'
-//                 }
-//             }
-//         }
-//     },
-//     series: pb_data,
-// })
 
 function toggleMaps(){
+    console.log('toggleMaps called');
     if(document.getElementById('world-graph').innerText=='World Map'){
         plotWorldMap();
         document.getElementById('world-graph').innerText='Region Wise World Data'

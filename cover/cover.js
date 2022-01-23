@@ -20,8 +20,8 @@ function onloadfunc() {
     analysefactors();
     plotscatter();
     plotpackedbubble()
-    
   }
+
   
   countryselection.addEventListener('change',() => {
       country = countryselection.options[countryselection.selectedIndex].text;

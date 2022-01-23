@@ -89,3 +89,5 @@ function createworldmap(wm_data){
         });
     });
 }
+
+
